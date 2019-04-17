@@ -12,7 +12,11 @@ class Api::V1::AuthController < ApplicationController
   def show
     user_id = JWT.decode(request.headers["Authorization"], nil, false)[0]["user_id"]
     user = User.find(user_id)
-    render json: { user: user}
+    serialized_data = ActiveModelSerializers::Adapter::Json.new(
+      UserSerializer.new(user)
+    ).serializable_hash
+    # byebug
+    render json: { user: serialized_data[:user]}
   end
 
   private
