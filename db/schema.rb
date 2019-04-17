@@ -24,9 +24,11 @@ ActiveRecord::Schema.define(version: 2019_04_16_223251) do
   create_table "messages", force: :cascade do |t|
     t.string "text"
     t.bigint "conversation_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -48,4 +50,5 @@ ActiveRecord::Schema.define(version: 2019_04_16_223251) do
   end
 
   add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
 end
