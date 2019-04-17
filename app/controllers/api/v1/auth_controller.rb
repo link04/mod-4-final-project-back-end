@@ -15,7 +15,7 @@ class Api::V1::AuthController < ApplicationController
     serialized_data = ActiveModelSerializers::Adapter::Json.new(
       UserSerializer.new(user)
     ).serializable_hash
-    # byebug
+    
     render json: { user: serialized_data[:user]}
   end
 
